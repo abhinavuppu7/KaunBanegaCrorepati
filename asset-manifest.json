@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/KaunBanegaCrorepati/static/css/main.c93bd4cb.chunk.css",
+    "main.js": "/KaunBanegaCrorepati/static/js/main.483ff2c6.chunk.js",
+    "main.js.map": "/KaunBanegaCrorepati/static/js/main.483ff2c6.chunk.js.map",
+    "runtime-main.js": "/KaunBanegaCrorepati/static/js/runtime-main.4ee2e507.js",
+    "runtime-main.js.map": "/KaunBanegaCrorepati/static/js/runtime-main.4ee2e507.js.map",
+    "static/css/2.b8e42a58.chunk.css": "/KaunBanegaCrorepati/static/css/2.b8e42a58.chunk.css",
+    "static/js/2.d394f4ac.chunk.js": "/KaunBanegaCrorepati/static/js/2.d394f4ac.chunk.js",
+    "static/js/2.d394f4ac.chunk.js.map": "/KaunBanegaCrorepati/static/js/2.d394f4ac.chunk.js.map",
+    "index.html": "/KaunBanegaCrorepati/index.html",
+    "static/css/2.b8e42a58.chunk.css.map": "/KaunBanegaCrorepati/static/css/2.b8e42a58.chunk.css.map",
+    "static/css/main.c93bd4cb.chunk.css.map": "/KaunBanegaCrorepati/static/css/main.c93bd4cb.chunk.css.map",
+    "static/js/2.d394f4ac.chunk.js.LICENSE.txt": "/KaunBanegaCrorepati/static/js/2.d394f4ac.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.4ee2e507.js",
+    "static/css/2.b8e42a58.chunk.css",
+    "static/js/2.d394f4ac.chunk.js",
+    "static/css/main.c93bd4cb.chunk.css",
+    "static/js/main.483ff2c6.chunk.js"
+  ]
+}
