@@ -3,6 +3,9 @@ import Getquestions from "../Question&answers";
 import MessageModal from "./MessageModal";
 import ConfirmModal from "./ConfirmModal";
 import Poll from "./poll";
+import kbcrotate from "../images/kbcrotate.png";
+import "../App.css";
+import Celebrate from "./Confetti";
 
 class Question extends Component {
 	state = {
@@ -28,6 +31,7 @@ class Question extends Component {
 		presentLifeline: "",
 		currentanswer: "",
 		data: [],
+		won: false,
 	};
 	closeConfirm = () => {
 		var { confirmDialog } = this.state;
@@ -41,12 +45,18 @@ class Question extends Component {
 		this.setState({ messageDialog, poll });
 	};
 	nextQuestion = async () => {
-		var { qlev, correct, presentOptions } = this.state;
-		await this.props.handlelvl();
-		correct = ["", "", "", ""];
-		presentOptions = ["", "", "", ""];
+		var { qlev, correct, presentOptions, won } = this.state;
 
-		await this.setState({ qlev: this.props.qlevel, correct, presentOptions });
+		if (qlev != 11) {
+			await this.props.handlelvl();
+			correct = ["", "", "", ""];
+			presentOptions = ["", "", "", ""];
+
+			await this.setState({ qlev: this.props.qlevel, correct, presentOptions });
+		} else {
+			won = true;
+			await this.setState({ won });
+		}
 	};
 	applyfifty = async () => {
 		var { questions, qlev, presentOptions, fiftyOption, confirmDialog } =
@@ -207,6 +217,7 @@ class Question extends Component {
 	handleOption = async (e) => {
 		var { questions, qlev, correct } = this.state;
 		var { options } = questions[qlev];
+
 		if (e.target.value === questions[qlev].answer) {
 			for (var i = 0; i < 4; i++) {
 				if (options[i] === questions[qlev].answer) {
@@ -214,6 +225,7 @@ class Question extends Component {
 				}
 			}
 			this.setState(correct);
+
 			await setTimeout(this.nextQuestion, 3000);
 		} else {
 			for (var i = 0; i < 4; i++) {
@@ -237,6 +249,8 @@ class Question extends Component {
 				style={{
 					display: "flex",
 					alignItems: "space-between",
+					marginRight: "10%",
+					marginBottom: "0.2%",
 				}}
 			>
 				{this.state.poll && (
@@ -265,6 +279,7 @@ class Question extends Component {
 						justifyContent: "space-evenly",
 						alignSelf: "center",
 						alignContent: "flex-start",
+						marginLeft: "5%",
 					}}
 				>
 					<button
@@ -275,6 +290,7 @@ class Question extends Component {
 							marginBottom: "20px",
 							borderRadius: "50% 50% 50% 50% / 49% 50% 50% 50%",
 							backgroundColor: "purple",
+							border: "3px solid gold",
 						}}
 						type="button"
 						class="btn btn-primary "
@@ -294,6 +310,7 @@ class Question extends Component {
 							opacity: this.state.pollOption === 0 ? "0.5" : 1,
 							borderRadius: "50% 50% 50% 50% / 49% 50% 50% 50%",
 							backgroundColor: "purple",
+							border: "3px solid gold",
 						}}
 						type="button"
 						class="btn btn-primary "
@@ -312,6 +329,7 @@ class Question extends Component {
 							opacity: this.state.dialOption === 0 ? "0.5" : 1,
 							borderRadius: "50% 50% 50% 50% / 49% 50% 50% 50%",
 							backgroundColor: "purple",
+							border: "3px solid gold",
 						}}
 						type="button"
 						class="btn btn-primary "
@@ -323,76 +341,108 @@ class Question extends Component {
 						/>
 					</button>
 				</div>
+
 				<div
 					style={{
 						display: "flex",
 						flexDirection: "column",
-						justifyContent: "flex-end",
-						alignSelf: "flex-end",
+						// justifyContent: "flex-end",
+
+						// alignSelf: "flex-end",
+						marginLeft: "20%",
+						// marginRight: "10%",
 					}}
 				>
-					<button
-						style={{
-							width: "800px",
-							backgroundColor: "purple",
-						}}
-						type="button"
-						class="btn btn-primary btn-lg btn-block"
-					>
-						{questions[qlev].question}
-					</button>
+					<img src={kbcrotate} className="App-logo" alt="kbc" />
 					<div
 						style={{
 							display: "flex",
-							justifyContent: "space-between",
-							marginBottom: "20px",
-							marginTop: "10px",
+							flexDirection: "column",
+							alignSelf: "flex-end",
 						}}
 					>
 						<button
-							style={{ width: "350px", height: "40px" }}
+							style={{
+								width: "800px",
+								backgroundColor: "purple",
+								border: "3px solid gold",
+								marginTop: "3%",
+							}}
 							type="button"
-							class={correct[0] || current[0]}
-							value={questions[qlev].options[0]}
-							onClick={this.handleOption}
+							class="btn btn-primary btn-lg btn-block"
 						>
-							{presentOptions[0] || questions[qlev].options[0]}
+							{questions[qlev].question}
 						</button>
-						<button
-							style={{ width: "350px", height: "40px" }}
-							type="button"
-							class={correct[1] || current[1]}
-							value={questions[qlev].options[1]}
-							onClick={this.handleOption}
+						<div
+							style={{
+								display: "flex",
+								justifyContent: "space-between",
+								marginBottom: "20px",
+								marginTop: "10px",
+							}}
 						>
-							{presentOptions[1] || questions[qlev].options[1]}
-						</button>
-					</div>
-					<div
-						style={{
-							display: "flex",
-							justifyContent: "space-between",
-							marginBottom: "10px",
-						}}
-					>
-						<button
-							style={{ width: "350px", height: "40px" }}
-							type="button"
-							class={correct[2] || current[2]}
-							value={questions[qlev].options[2]}
-							onClick={this.handleOption}
+							<button
+								style={{
+									width: "350px",
+									height: "40px",
+									border: "3px solid gold",
+								}}
+								type="button"
+								class={correct[0] || current[0]}
+								value={questions[qlev].options[0]}
+								onClick={this.handleOption}
+							>
+								{presentOptions[0] || questions[qlev].options[0]}
+							</button>
+							<button
+								style={{
+									width: "350px",
+									height: "40px",
+									border: "3px solid gold",
+								}}
+								type="button"
+								class={correct[1] || current[1]}
+								value={questions[qlev].options[1]}
+								onClick={this.handleOption}
+							>
+								{presentOptions[1] || questions[qlev].options[1]}
+							</button>
+						</div>
+						<div
+							style={{
+								display: "flex",
+								justifyContent: "space-between",
+								// marginBottom: "8px",
+							}}
 						>
-							{presentOptions[2] || questions[qlev].options[2]}
-						</button>
-						<button
-							style={{ width: "350px", height: "40px" }}
-							type="button"
-							class={correct[3] || current[3]}
-							value={questions[qlev].options[3]}
-							onClick={this.handleOption}
-						>
-							{presentOptions[3] || questions[qlev].options[3]}
-						</button>
+							<button
+								style={{
+									width: "350px",
+									height: "40px",
+									border: "3px solid gold",
+								}}
+								type="button"
+								class={correct[2] || current[2]}
+								value={questions[qlev].options[2]}
+								onClick={this.handleOption}
+							>
+								{presentOptions[2] || questions[qlev].options[2]}
+							</button>
+							<button
+								style={{
+									width: "350px",
+									height: "40px",
+									border: "3px solid gold",
+								}}
+								type="button"
+								class={correct[3] || current[3]}
+								value={questions[qlev].options[3]}
+								onClick={this.handleOption}
+							>
+								{presentOptions[3] || questions[qlev].options[3]}
+							</button>
+						</div>
+						/
 					</div>
 				</div>
 			</div>

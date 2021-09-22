@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
+import Disclaimer from "./Disclaimer";
 
 export default function Landing() {
+	const [disclaimer, setdisclaimer] = useState(true);
+	async function close() {
+		setdisclaimer(!disclaimer);
+	}
 	return (
 		<div
 			style={{
@@ -16,11 +21,26 @@ export default function Landing() {
 				justifyContent: "center",
 			}}
 		>
-			<div>
-				<button type="button" class="btn btn-warning">
+			{" "}
+			<Disclaimer open={disclaimer} close={close} />
+			<button
+				style={{
+					height: "60px",
+					width: "300px",
+				}}
+				type="button"
+				class="btn btn-warning"
+			>
+				<h1
+					style={{
+						color: "purple",
+						borderBlockColor: "solid 3px black",
+						fontWeight: "800",
+					}}
+				>
 					Play Now
-				</button>
-			</div>
+				</h1>
+			</button>
 		</div>
 	);
 }
