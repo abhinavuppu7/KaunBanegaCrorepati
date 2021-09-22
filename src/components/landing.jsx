@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Disclaimer from "./Disclaimer";
 
 export default function Landing() {
-	const [disclaimer, setdisclaimer] = useState(true);
+	const [disclaimer, setdisclaimer] = useState(false);
 	async function close() {
 		setdisclaimer(!disclaimer);
 	}
