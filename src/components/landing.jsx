@@ -1,9 +1,13 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Disclaimer from "./Disclaimer";
 
 export default function Landing() {
 	const [disclaimer, setdisclaimer] = useState(false);
 	async function close() {
+		setdisclaimer(!disclaimer);
+	}
+	async function opendisc() {
 		setdisclaimer(!disclaimer);
 	}
 	return (
@@ -21,7 +25,6 @@ export default function Landing() {
 				justifyContent: "center",
 			}}
 		>
-			{" "}
 			<Disclaimer open={disclaimer} close={close} />
 			<button
 				style={{
@@ -30,6 +33,7 @@ export default function Landing() {
 				}}
 				type="button"
 				class="btn btn-warning"
+				onClick={opendisc}
 			>
 				<h1
 					style={{
