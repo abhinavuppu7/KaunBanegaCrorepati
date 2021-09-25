@@ -3,9 +3,12 @@ import Getquestions from "../Question&answers";
 import MessageModal from "./MessageModal";
 import ConfirmModal from "./ConfirmModal";
 import Poll from "./poll";
+import Optioncomponent from "./option";
+import Lifelinecomponent from "./lifeline";
 import kbcrotate from "../images/kbcrotate.png";
+import Lose from "./Lost";
 import "../App.css";
-import Celebrate from "./Confetti";
+import Congratulations from "./Congratulations";
 
 class Question extends Component {
 	state = {
@@ -31,7 +34,9 @@ class Question extends Component {
 		presentLifeline: "",
 		currentanswer: "",
 		data: [],
+		index: [0, 1, 2, 3],
 		won: false,
+		lose: false,
 	};
 	closeConfirm = () => {
 		var { confirmDialog } = this.state;
@@ -47,7 +52,7 @@ class Question extends Component {
 	nextQuestion = async () => {
 		var { qlev, correct, presentOptions, won } = this.state;
 
-		if (qlev != 11) {
+		if (qlev !== 11) {
 			await this.props.handlelvl();
 			correct = ["", "", "", ""];
 			presentOptions = ["", "", "", ""];
@@ -213,6 +218,11 @@ class Question extends Component {
 		confirmDialog = true;
 		this.setState({ confirmDialog });
 	};
+	handleLose = async () => {
+		var { lose } = this.state;
+		lose = true;
+		this.setState({ lose });
+	};
 
 	handleOption = async (e) => {
 		var { questions, qlev, correct } = this.state;
@@ -240,6 +250,7 @@ class Question extends Component {
 				}
 			}
 			await this.setState({ correct });
+			await setTimeout(this.handleLose, 3000);
 		}
 	};
 	render() {
@@ -248,6 +259,8 @@ class Question extends Component {
 			<div
 				style={{
 					display: "flex",
+					flex: "0.6",
+					justifyContent: "flex-start",
 					alignItems: "space-between",
 					marginRight: "10%",
 					marginBottom: "0.2%",
@@ -261,6 +274,8 @@ class Question extends Component {
 						data={this.state.data}
 					/>
 				)}
+				<Lose open={this.state.lose} />
+				<Congratulations open={this.state.won} />
 				<ConfirmModal
 					open={this.state.confirmDialog}
 					lifeline={this.state.lifeline}
@@ -282,75 +297,37 @@ class Question extends Component {
 						marginLeft: "5%",
 					}}
 				>
-					<button
-						style={{
-							width: "150px",
-							height: "100px",
-							opacity: this.state.fiftyOption === 0 ? "0.5" : 1,
-							marginBottom: "20px",
-							borderRadius: "50% 50% 50% 50% / 49% 50% 50% 50%",
-							backgroundColor: "purple",
-							border: "3px solid gold",
-						}}
-						type="button"
-						class="btn btn-primary "
-						onClick={this.handlefifty}
-					>
-						<img
-							style={{ height: "50px" }}
-							src="https://www.pikpng.com/pngl/b/90-902801_50-50-black-and-white-clipart.png"
-						/>
-					</button>
-
-					<button
-						style={{
-							width: "150px",
-							height: "100px",
-							marginBottom: "20px",
-							opacity: this.state.pollOption === 0 ? "0.5" : 1,
-							borderRadius: "50% 50% 50% 50% / 49% 50% 50% 50%",
-							backgroundColor: "purple",
-							border: "3px solid gold",
-						}}
-						type="button"
-						class="btn btn-primary "
-						onClick={this.handlePoll}
-					>
-						<img
-							style={{ height: "80px" }}
-							src="https://www.pngkey.com/png/full/235-2350076_gmw-host-clipart-library-people-icon-png-white.png"
-						/>
-					</button>
-					<button
-						style={{
-							width: "150px",
-							height: "100px",
-							marginBottom: "20px",
-							opacity: this.state.dialOption === 0 ? "0.5" : 1,
-							borderRadius: "50% 50% 50% 50% / 49% 50% 50% 50%",
-							backgroundColor: "purple",
-							border: "3px solid gold",
-						}}
-						type="button"
-						class="btn btn-primary "
-						onClick={this.handlePhone}
-					>
-						<img
-							style={{ height: "80px" }}
-							src="https://www.nicepng.com/png/full/379-3794777_white-phone-icon-white-phone-call-icon.png"
-						/>
-					</button>
+					<Lifelinecomponent
+						lifelineoption={this.state.fiftyOption}
+						src={
+							"https://www.pikpng.com/pngl/b/90-902801_50-50-black-and-white-clipart.png"
+						}
+						handlelifeline={this.handlefifty}
+						imgheight="50px"
+					/>
+					<Lifelinecomponent
+						lifelineoption={this.state.pollOption}
+						src={
+							"https://www.pngkey.com/png/full/235-2350076_gmw-host-clipart-library-people-icon-png-white.png"
+						}
+						handlelifeline={this.handlePoll}
+						imgheight="80px"
+					/>
+					<Lifelinecomponent
+						lifelineoption={this.state.dialOption}
+						src={
+							"https://www.nicepng.com/png/full/379-3794777_white-phone-icon-white-phone-call-icon.png"
+						}
+						handlelifeline={this.handlePhone}
+						imgheight="80px"
+					/>
 				</div>
-
+				{/* quetions and options */}
 				<div
 					style={{
 						display: "flex",
 						flexDirection: "column",
-						// justifyContent: "flex-end",
-
-						// alignSelf: "flex-end",
 						marginLeft: "20%",
-						// marginRight: "10%",
 					}}
 				>
 					<img src={kbcrotate} className="App-logo" alt="kbc" />
@@ -358,7 +335,6 @@ class Question extends Component {
 						style={{
 							display: "flex",
 							flexDirection: "column",
-							alignSelf: "flex-end",
 						}}
 					>
 						<button
@@ -369,80 +345,30 @@ class Question extends Component {
 								marginTop: "3%",
 							}}
 							type="button"
-							class="btn btn-primary btn-lg btn-block"
+							className="btn btn-primary btn-lg btn-block"
 						>
 							{questions[qlev].question}
 						</button>
 						<div
 							style={{
 								display: "flex",
+								flexWrap: "wrap",
+								alignItems: "center",
 								justifyContent: "space-between",
-								marginBottom: "20px",
-								marginTop: "10px",
 							}}
 						>
-							<button
-								style={{
-									width: "350px",
-									height: "40px",
-									border: "3px solid gold",
-								}}
-								type="button"
-								class={correct[0] || current[0]}
-								value={questions[qlev].options[0]}
-								onClick={this.handleOption}
-							>
-								{presentOptions[0] || questions[qlev].options[0]}
-							</button>
-							<button
-								style={{
-									width: "350px",
-									height: "40px",
-									border: "3px solid gold",
-								}}
-								type="button"
-								class={correct[1] || current[1]}
-								value={questions[qlev].options[1]}
-								onClick={this.handleOption}
-							>
-								{presentOptions[1] || questions[qlev].options[1]}
-							</button>
+							{this.state.index.map((idx) => {
+								return (
+									<Optioncomponent
+										key={idx}
+										appliedclass={correct[idx] || current[idx]}
+										optionvalue={questions[qlev].options[idx]}
+										handleclick={this.handleOption}
+										presentOption={presentOptions[idx]}
+									/>
+								);
+							})}
 						</div>
-						<div
-							style={{
-								display: "flex",
-								justifyContent: "space-between",
-								// marginBottom: "8px",
-							}}
-						>
-							<button
-								style={{
-									width: "350px",
-									height: "40px",
-									border: "3px solid gold",
-								}}
-								type="button"
-								class={correct[2] || current[2]}
-								value={questions[qlev].options[2]}
-								onClick={this.handleOption}
-							>
-								{presentOptions[2] || questions[qlev].options[2]}
-							</button>
-							<button
-								style={{
-									width: "350px",
-									height: "40px",
-									border: "3px solid gold",
-								}}
-								type="button"
-								class={correct[3] || current[3]}
-								value={questions[qlev].options[3]}
-								onClick={this.handleOption}
-							>
-								{presentOptions[3] || questions[qlev].options[3]}
-							</button>
-						</div>
-						/
 					</div>
 				</div>
 			</div>

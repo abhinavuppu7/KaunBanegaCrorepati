@@ -25,13 +25,11 @@ class Poll extends Component {
 						display: "flex",
 						flexDirection: "column",
 						alignItems: "center",
-
 						left: "20%",
 						right: "20%",
 						bottom: "15%",
 						height: "inherit",
 						width: "inherit",
-						border: "1px solid #ccc",
 						background: "purple",
 						borderRadius: "10px",
 						border: "solid 5px gold",

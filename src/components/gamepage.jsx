@@ -18,7 +18,7 @@ class GamePagee extends Component {
 					backgroundImage: `url("https://png.pngtree.com/thumb_back/fh260/background/20190223/ourmid/pngtree-purple-light-effect-electronic-technology-background-backgrounddatabusinessblueelectronictechnologyintelligentblue-backgroundtechnology-backgroundlightcool-image_78722.jpg"
 					       
 					 )`,
-					backgroundRepeat: "no-repeat",
+					backgroundRepeat: "repeat",
 					minHeight: "100vh",
 					backgroundSize: "cover",
 					display: "flex",

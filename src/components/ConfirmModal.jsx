@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Modal from "react-modal";
 
 Modal.setAppElement("#root");
@@ -29,7 +29,6 @@ export default function ConfirmModal(props) {
 						bottom: "30%",
 						height: "20%",
 						width: "60%",
-						border: "1px solid #ccc",
 						background: "purple",
 						overflow: "auto",
 						WebkitOverflowScrolling: "touch",

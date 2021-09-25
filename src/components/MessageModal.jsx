@@ -1,10 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Modal from "react-modal";
 Modal.setAppElement("#root");
 export default function MessageModal(props) {
-	// Use default system voice and speed
-
-	// Stop the text currently being spoken
 	async function playtext(a) {
 		const text =
 			"Iam not sure but I think the correct option is  " +
@@ -43,7 +40,6 @@ export default function MessageModal(props) {
 						bottom: "30%",
 						height: "20%",
 						width: "60%",
-						border: "1px solid #ccc",
 						background: "purple",
 						overflow: "auto",
 						// WebkitOverflowScrolling: "touch",

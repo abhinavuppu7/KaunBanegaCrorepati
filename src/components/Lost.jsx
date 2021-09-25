@@ -1,11 +1,9 @@
 import React from "react";
 import Modal from "react-modal";
 import { Link } from "react-router-dom";
+
 Modal.setAppElement("#root");
-export default function Disclaimer(props) {
-	async function Continue() {
-		await props.close();
-	}
+export default function Lose(props) {
 	return (
 		<div>
 			<Modal
@@ -28,11 +26,10 @@ export default function Disclaimer(props) {
 						left: "20%",
 						right: "20%",
 						bottom: "30%",
-						height: "auto",
+						height: "20%",
 						width: "auto",
 						background: "purple",
 						overflow: "auto",
-						// WebkitOverflowScrolling: "touch",
 						borderRadius: "10px",
 						border: "solid 5px gold",
 						outline: "none",
@@ -42,31 +39,11 @@ export default function Disclaimer(props) {
 				}}
 				isOpen={props.open}
 			>
-				<img
-					style={{
-						width: "",
-						height: "40%",
-					}}
-					src={
-						"https://pnglux.com/wp-content/uploads/2021/03/1616471676_537_Exclamation-mark-PNG-HD.png"
-					}
-					alt="exclamaition mark"
-				/>
-				<div
-					style={{
-						color: "whitesmoke",
-						display: "flex",
-						flexDirection: "column",
-					}}
-				>
-					<h3>
-						This is game is developed for educational purposes .Monetary prizes
-						are not awarded for winnining or loosing the game
-					</h3>
-				</div>
-
-				<Link className="btn btn-warning" to="/gamepage" onClick={Continue}>
-					<b>Continue Game</b>
+				<h1 style={{ color: "whitesmoke" }}>
+					😌You lost Would you like to play again?
+				</h1>
+				<Link to="/landingpage" className="btn btn-warning">
+					Play Again
 				</Link>
 			</Modal>
 		</div>
