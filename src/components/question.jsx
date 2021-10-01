@@ -7,6 +7,7 @@ import Optioncomponent from "./option";
 import Lifelinecomponent from "./lifeline";
 import kbcrotate from "../images/kbcrotate.png";
 import Lose from "./Lost";
+import Timer from "./Timer";
 import "../App.css";
 import Congratulations from "./Congratulations";
 
@@ -37,37 +38,57 @@ class Question extends Component {
 		index: [0, 1, 2, 3],
 		won: false,
 		lose: false,
+		stoptimer: false,
+		stopwatch: 30,
 	};
 	closeConfirm = () => {
-		var { confirmDialog } = this.state;
+		var { confirmDialog, stoptimer } = this.state;
 		confirmDialog = !confirmDialog;
-		this.setState({ confirmDialog });
+		stoptimer = false;
+		this.setState({ confirmDialog, stoptimer });
 	};
 	closeMessage = () => {
-		var { messageDialog, poll } = this.state;
+		var { messageDialog, poll, stoptimer } = this.state;
 		messageDialog = false;
 		poll = false;
-		this.setState({ messageDialog, poll });
+		stoptimer = false;
+		this.setState({ messageDialog, poll, stoptimer });
 	};
 	nextQuestion = async () => {
-		var { qlev, correct, presentOptions, won } = this.state;
+		var { qlev, correct, presentOptions, won, stopwatch, stoptimer } =
+			this.state;
+		stopwatch = 30;
+		stoptimer = false;
 
 		if (qlev !== 11) {
 			await this.props.handlelvl();
 			correct = ["", "", "", ""];
 			presentOptions = ["", "", "", ""];
 
-			await this.setState({ qlev: this.props.qlevel, correct, presentOptions });
+			await this.setState({
+				qlev: this.props.qlevel,
+				correct,
+				presentOptions,
+				stopwatch,
+				stoptimer,
+			});
 		} else {
 			won = true;
 			await this.setState({ won });
 		}
 	};
 	applyfifty = async () => {
-		var { questions, qlev, presentOptions, fiftyOption, confirmDialog } =
-			this.state;
+		var {
+			questions,
+			qlev,
+			presentOptions,
+			fiftyOption,
+			confirmDialog,
+			stoptimer,
+		} = this.state;
 		confirmDialog = !confirmDialog;
-		this.setState({ confirmDialog });
+		stoptimer = false;
+		this.setState({ confirmDialog, stoptimer });
 		var { options } = questions[qlev];
 		var count = 2;
 		for (var i = 0; i < 4; i++) {
@@ -191,29 +212,37 @@ class Question extends Component {
 		return;
 	};
 	handlefifty = async () => {
-		var { fiftyOption, confirmDialog, presentLifeline, lifeline } = this.state;
+		var { fiftyOption, confirmDialog, presentLifeline, lifeline, stoptimer } =
+			this.state;
 		if (fiftyOption === 0) return;
 		presentLifeline = "applyfifty";
 		lifeline = "50-50";
+		stoptimer = true;
+		this.setState({ stoptimer });
 		this.setState({ presentLifeline, lifeline });
 		confirmDialog = true;
 		this.setState({ confirmDialog });
 	};
 	handlePoll = async () => {
-		var { pollOption, confirmDialog, presentLifeline, lifeline } = this.state;
+		var { pollOption, confirmDialog, presentLifeline, lifeline, stoptimer } =
+			this.state;
 		if (pollOption === 0) return;
 		presentLifeline = "applyPoll";
 		lifeline = "Audience Poll";
+		stoptimer = true;
+		this.setState({ stoptimer });
 		this.setState({ presentLifeline, lifeline });
 		confirmDialog = true;
 		this.setState({ confirmDialog });
 	};
 	handlePhone = async () => {
-		var { dialOption, confirmDialog, presentLifeline, lifeline } = this.state;
+		var { dialOption, confirmDialog, presentLifeline, lifeline, stoptimer } =
+			this.state;
 		if (dialOption === 0) return;
 		presentLifeline = "applyPhone";
 		lifeline = "phone a friend";
-
+		stoptimer = true;
+		this.setState({ stoptimer });
 		this.setState({ presentLifeline, lifeline });
 		confirmDialog = true;
 		this.setState({ confirmDialog });
@@ -225,8 +254,10 @@ class Question extends Component {
 	};
 
 	handleOption = async (e) => {
-		var { questions, qlev, correct } = this.state;
+		var { questions, qlev, correct, stoptimer } = this.state;
 		var { options } = questions[qlev];
+		stoptimer = true;
+		this.setState({ stoptimer });
 
 		if (e.target.value === questions[qlev].answer) {
 			for (var i = 0; i < 4; i++) {
@@ -337,12 +368,18 @@ class Question extends Component {
 							flexDirection: "column",
 						}}
 					>
+						<Timer
+							timecomplete={this.handleLose}
+							stop={this.state.stoptimer}
+							initialTime={this.state.stopwatch}
+							level={this.props.qlevel}
+						/>
 						<button
 							style={{
 								width: "800px",
 								backgroundColor: "purple",
 								border: "3px solid gold",
-								marginTop: "3%",
+								// marginTop: "3%",
 							}}
 							type="button"
 							className="btn btn-primary btn-lg btn-block"

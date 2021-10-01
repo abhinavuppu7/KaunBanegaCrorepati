@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Question from "./question";
 import Level from "./Level";
+import clock from "../audio/KbcClock.mp3";
 
 class GamePagee extends Component {
 	state = {
@@ -26,6 +27,9 @@ class GamePagee extends Component {
 				}}
 			>
 				<Question qlevel={this.state.level} handlelvl={this.handlelevel} />
+				<audio>
+					<source src={clock} />
+				</audio>
 
 				<Level qlevel={this.state.level} />
 			</div>

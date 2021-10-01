@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import m from "../audio/KbcClock.mp3";
 import Disclaimer from "./Disclaimer";
 
 export default function Landing() {
@@ -9,6 +10,7 @@ export default function Landing() {
 	async function opendisc() {
 		setdisclaimer(!disclaimer);
 	}
+
 	return (
 		<div
 			style={{
