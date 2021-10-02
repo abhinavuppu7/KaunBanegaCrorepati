@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import Question from "./question";
 import Level from "./Level";
+import Currentremainder from "./currentremainder";
 import clock from "../audio/KbcClock.mp3";
+import "../styles/gamepage.css";
 
 class GamePagee extends Component {
 	state = {
@@ -15,17 +17,14 @@ class GamePagee extends Component {
 	render() {
 		return (
 			<div
+				className="gamepage"
 				style={{
 					backgroundImage: `url("https://png.pngtree.com/thumb_back/fh260/background/20190223/ourmid/pngtree-purple-light-effect-electronic-technology-background-backgrounddatabusinessblueelectronictechnologyintelligentblue-backgroundtechnology-backgroundlightcool-image_78722.jpg"
-					       
-					 )`,
-					backgroundRepeat: "repeat",
-					minHeight: "100vh",
-					backgroundSize: "cover",
-					display: "flex",
-					justifyContent: "space-evenly",
+					   
+				 )`,
 				}}
 			>
+				{/* <Currentremainder qlevel={this.state.level} /> */}
 				<Question qlevel={this.state.level} handlelvl={this.handlelevel} />
 				<audio>
 					<source src={clock} />

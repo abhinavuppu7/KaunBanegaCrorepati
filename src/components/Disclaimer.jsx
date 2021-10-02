@@ -48,7 +48,7 @@ export default function Disclaimer(props) {
 						height: "40%",
 					}}
 					src={
-						"https://pnglux.com/wp-content/uploads/2021/03/1616471676_537_Exclamation-mark-PNG-HD.png"
+						"https://icones.pro/wp-content/uploads/2021/05/symbole-d-avertissement-jaune.png"
 					}
 					alt="exclamaition mark"
 				/>

@@ -39,9 +39,7 @@ export default function Lose(props) {
 				}}
 				isOpen={props.open}
 			>
-				<h1 style={{ color: "whitesmoke" }}>
-					😌You lost Would you like to play again?
-				</h1>
+				<h1 style={{ color: "whitesmoke" }}>Would you like to play again?</h1>
 				<Link to="/landingpage" className="btn btn-warning">
 					Play Again
 				</Link>

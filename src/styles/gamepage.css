@@ -1,0 +1,15 @@
+.gamepage {
+	min-height: 100vh;
+	background-size: cover;
+	display: flex;
+	justify-content: center;
+}
+
+@media (max-width: 640) {
+	.gamepage {
+		display: flex;
+		flex-direction: column;
+		align-self: flex-end;
+		background-size: cover;
+	}
+}

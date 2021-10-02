@@ -9,7 +9,9 @@ import kbcrotate from "../images/kbcrotate.png";
 import Lose from "./Lost";
 import Timer from "./Timer";
 import "../App.css";
+import "../styles/question.css";
 import Congratulations from "./Congratulations";
+import Celebrate from "./Confetti";
 
 class Question extends Component {
 	state = {
@@ -287,16 +289,7 @@ class Question extends Component {
 	render() {
 		const { questions, qlev, current, correct, presentOptions } = this.state;
 		return (
-			<div
-				style={{
-					display: "flex",
-					flex: "0.6",
-					justifyContent: "flex-start",
-					alignItems: "space-between",
-					marginRight: "10%",
-					marginBottom: "0.2%",
-				}}
-			>
+			<div className="question">
 				{this.state.poll && (
 					<Poll
 						options={questions[qlev].options}
@@ -305,6 +298,7 @@ class Question extends Component {
 						data={this.state.data}
 					/>
 				)}
+				{this.state.won && <Celebrate />}
 				<Lose open={this.state.lose} />
 				<Congratulations open={this.state.won} />
 				<ConfirmModal
@@ -318,16 +312,7 @@ class Question extends Component {
 					close={this.closeMessage}
 					ans={this.state.currentanswer}
 				/>
-				<div
-					style={{
-						display: "flex",
-						flexDirection: "column",
-						justifyContent: "space-evenly",
-						alignSelf: "center",
-						alignContent: "flex-start",
-						marginLeft: "5%",
-					}}
-				>
+				<div className="lifeline">
 					<Lifelinecomponent
 						lifelineoption={this.state.fiftyOption}
 						src={
@@ -354,18 +339,13 @@ class Question extends Component {
 					/>
 				</div>
 				{/* quetions and options */}
-				<div
-					style={{
-						display: "flex",
-						flexDirection: "column",
-						marginLeft: "20%",
-					}}
-				>
+				<div className="currentquestion">
 					<img src={kbcrotate} className="App-logo" alt="kbc" />
 					<div
 						style={{
 							display: "flex",
 							flexDirection: "column",
+							alignSelf: "center",
 						}}
 					>
 						<Timer
@@ -375,25 +355,15 @@ class Question extends Component {
 							level={this.props.qlevel}
 						/>
 						<button
-							style={{
-								width: "800px",
-								backgroundColor: "purple",
-								border: "3px solid gold",
-								// marginTop: "3%",
-							}}
-							type="button"
 							className="btn btn-primary btn-lg btn-block"
+							style={{
+								backgroundColor: "purple",
+								border: "solid gold",
+							}}
 						>
 							{questions[qlev].question}
 						</button>
-						<div
-							style={{
-								display: "flex",
-								flexWrap: "wrap",
-								alignItems: "center",
-								justifyContent: "space-between",
-							}}
-						>
+						<div className="optionbutton">
 							{this.state.index.map((idx) => {
 								return (
 									<Optioncomponent

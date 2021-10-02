@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
+import clock from "../audio/KbcClock.mp3";
 export default function Timer(props) {
 	const [t, Settime] = useState(30);
+
 	useEffect(() => {
 		Settime(30);
 	}, [props.level]);
+
 	useEffect(() => {
 		if (!props.stop && t >= 1)
 			var timer = setTimeout(() => {

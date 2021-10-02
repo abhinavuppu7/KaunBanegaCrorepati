@@ -1,5 +1,7 @@
 import Confetti from "react-confetti";
+import useWindowSize from "react-use/lib/useWindowSize";
 
 export default function Celebrate() {
-	return <Confetti width="100%" height="100%" />;
+	const { width, height } = useWindowSize();
+	return <Confetti width={width} height={height} />;
 }

@@ -4,9 +4,16 @@
 	align-self: center;
 	margin-top: 1%;
 }
-@media (prefers-reduced-motion: no-preference) {
+@media all {
 	.App-logo {
 		animation: App-logo-spin infinite 7s linear;
+	}
+}
+@media (max-width: 600px) {
+	.App-logo {
+		height: 200px;
+		width: 200px;
+		/* display: none; */
 	}
 }
 

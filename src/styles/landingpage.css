@@ -1,0 +1,14 @@
+h1 {
+	color: purple;
+	border-block-color: solid 3px black;
+	font-weight: 800;
+}
+.backside {
+	background-repeat: no-repeat;
+	min-height: 100vh;
+	background-size: cover;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}

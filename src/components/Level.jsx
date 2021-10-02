@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import LevelComponent from "./levelcomponent";
+import "../styles/gamepageelements.css";
 
 class Level extends Component {
 	state = {
@@ -57,15 +58,7 @@ class Level extends Component {
 	render() {
 		const { level } = this.state;
 		return (
-			<div
-				style={{
-					display: "flex",
-					flexDirection: "column",
-					justifyContent: "space-evenly",
-					alignItems: "center",
-					marginLeft: "10%",
-				}}
-			>
+			<div className="level">
 				{level.map((lvl) => {
 					return (
 						<LevelComponent

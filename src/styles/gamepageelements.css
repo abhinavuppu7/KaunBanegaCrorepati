@@ -1,0 +1,21 @@
+.level {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+	margin-left: 10%;
+}
+.levelup {
+	display: none;
+}
+@media (max-width: 600px) {
+	.level {
+		display: none;
+	}
+	.levelup {
+		flex: 1;
+		display: flex;
+		justify-content: space-between;
+		align-self: center;
+	}
+}
