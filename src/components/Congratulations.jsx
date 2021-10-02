@@ -1,8 +1,12 @@
 import React from "react";
 import Modal from "react-modal";
 
+import useWindowSize from "react-use/lib/useWindowSize";
+import Confetti from "react-confetti";
+
 Modal.setAppElement("#root");
 export default function Congratulations(props) {
+	const { width, height } = useWindowSize();
 	return (
 		<div>
 			<Modal
