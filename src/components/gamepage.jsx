@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import Question from "./question";
 import Level from "./Level";
-import Currentremainder from "./currentremainder";
-import clock from "../audio/KbcClock.mp3";
 import "../styles/gamepage.css";
 
 class GamePagee extends Component {
@@ -26,9 +24,6 @@ class GamePagee extends Component {
 			>
 				{/* <Currentremainder qlevel={this.state.level} /> */}
 				<Question qlevel={this.state.level} handlelvl={this.handlelevel} />
-				<audio>
-					<source src={clock} />
-				</audio>
 
 				<Level qlevel={this.state.level} />
 			</div>

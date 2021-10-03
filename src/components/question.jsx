@@ -10,6 +10,8 @@ import Lose from "./Lost";
 import Timer from "./Timer";
 import "../App.css";
 import "../styles/question.css";
+import group from "../images/group.png";
+import fifty from "../images/fifty.png";
 import Congratulations from "./Congratulations";
 import Celebrate from "./Confetti";
 
@@ -27,6 +29,8 @@ class Question extends Component {
 		presentQuestion: "",
 		presentOptions: ["", "", "", ""],
 		fiftyOption: 1,
+		correctclick: false,
+		wrongclick: false,
 		pollOption: 1,
 		dialOption: 1,
 		currenttime: 60,
@@ -42,6 +46,8 @@ class Question extends Component {
 		lose: false,
 		stoptimer: false,
 		stopwatch: 30,
+		togglecount: 5,
+		arr: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
 	};
 	closeConfirm = () => {
 		var { confirmDialog, stoptimer } = this.state;
@@ -57,10 +63,20 @@ class Question extends Component {
 		this.setState({ messageDialog, poll, stoptimer });
 	};
 	nextQuestion = async () => {
-		var { qlev, correct, presentOptions, won, stopwatch, stoptimer } =
-			this.state;
+		var {
+			qlev,
+			correct,
+			presentOptions,
+			won,
+			stopwatch,
+			stoptimer,
+			togglecount,
+			correctclick,
+		} = this.state;
 		stopwatch = 30;
 		stoptimer = false;
+		togglecount = 5;
+		correctclick = false;
 
 		if (qlev !== 11) {
 			await this.props.handlelvl();
@@ -73,10 +89,13 @@ class Question extends Component {
 				presentOptions,
 				stopwatch,
 				stoptimer,
+				togglecount,
+				correctclick,
 			});
 		} else {
+			correctclick = false;
 			won = true;
-			await this.setState({ won });
+			await this.setState({ correctclick, won });
 		}
 	};
 	applyfifty = async () => {
@@ -254,9 +273,29 @@ class Question extends Component {
 		lose = true;
 		this.setState({ lose });
 	};
+	toggleOption = async (e) => {
+		var { questions, qlev, correct, stoptimer, togglecount } = this.state;
+		var { options } = questions[qlev];
+		stoptimer = true;
+		this.setState({ stoptimer });
+		for (var i = 0; i < 4; i++) {
+			if (options[i] === e.target.value) {
+				if (correct[i] === "btn btn-success") correct[i] = "btn btn-danger";
+				else correct[i] = "btn btn-success";
+			}
+		}
+		if (togglecount > 0) {
+			togglecount--;
+			this.setState({ togglecount });
+			await setTimeout(() => {
+				this.toggleOption(e);
+			}, 500);
+		} else this.handleOption(e);
+	};
 
 	handleOption = async (e) => {
-		var { questions, qlev, correct, stoptimer } = this.state;
+		var { questions, qlev, correct, stoptimer, correctclick, wrongclick } =
+			this.state;
 		var { options } = questions[qlev];
 		stoptimer = true;
 		this.setState({ stoptimer });
@@ -267,10 +306,13 @@ class Question extends Component {
 					correct[i] = "btn btn-success";
 				}
 			}
-			this.setState(correct);
+			correctclick = true;
+			this.setState({ correctclick });
 
-			await setTimeout(this.nextQuestion, 3000);
+			await setTimeout(this.nextQuestion, 2000);
 		} else {
+			wrongclick = true;
+			this.setState({ wrongclick });
 			for (var i = 0; i < 4; i++) {
 				if (options[i] === questions[qlev].answer) {
 					correct[i] = "btn btn-success";
@@ -283,7 +325,7 @@ class Question extends Component {
 				}
 			}
 			await this.setState({ correct });
-			await setTimeout(this.handleLose, 3000);
+			await setTimeout(this.handleLose, 2000);
 		}
 	};
 	render() {
@@ -298,6 +340,7 @@ class Question extends Component {
 						data={this.state.data}
 					/>
 				)}
+
 				{this.state.won && <Celebrate />}
 				<Lose open={this.state.lose} />
 				<Congratulations open={this.state.won} />
@@ -315,17 +358,13 @@ class Question extends Component {
 				<div className="lifeline">
 					<Lifelinecomponent
 						lifelineoption={this.state.fiftyOption}
-						src={
-							"https://www.pikpng.com/pngl/b/90-902801_50-50-black-and-white-clipart.png"
-						}
+						src={fifty}
 						handlelifeline={this.handlefifty}
 						imgheight="50px"
 					/>
 					<Lifelinecomponent
 						lifelineoption={this.state.pollOption}
-						src={
-							"https://www.pngkey.com/png/full/235-2350076_gmw-host-clipart-library-people-icon-png-white.png"
-						}
+						src={group}
 						handlelifeline={this.handlePoll}
 						imgheight="80px"
 					/>
@@ -353,6 +392,10 @@ class Question extends Component {
 							stop={this.state.stoptimer}
 							initialTime={this.state.stopwatch}
 							level={this.props.qlevel}
+							lose={this.state.lose}
+							correct={this.state.correctclick}
+							wrong={this.state.wrongclick}
+							won={this.state.won}
 						/>
 						<button
 							className="btn btn-primary btn-lg btn-block"
@@ -370,7 +413,7 @@ class Question extends Component {
 										key={idx}
 										appliedclass={correct[idx] || current[idx]}
 										optionvalue={questions[qlev].options[idx]}
-										handleclick={this.handleOption}
+										handleclick={this.toggleOption}
 										presentOption={presentOptions[idx]}
 									/>
 								);

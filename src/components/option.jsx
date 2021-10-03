@@ -5,7 +5,7 @@ export default function Optioncomponent(props) {
 			style={{
 				width: "350px",
 				height: "40px",
-				border: "3px solid gold",
+
 				marginTop: "1%",
 				marginBottom: "0.5%",
 			}}

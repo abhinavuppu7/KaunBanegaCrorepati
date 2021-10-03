@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Disclaimer from "./Disclaimer";
-import theme from "../audio/Theme.mp3";
 import "../styles/landingpage.css";
 
 export default function Landing() {
-	let [play, setPlay] = useState(false);
-	useEffect(() => {
-		setPlay(!play);
-	}, []);
 	const [disclaimer, setdisclaimer] = useState(false);
 	async function close() {
 		setdisclaimer(!disclaimer);
@@ -37,9 +32,6 @@ export default function Landing() {
 			>
 				<h1>Play Now</h1>
 			</button>
-			<audio autoPlay="true">
-				<source src={theme} />
-			</audio>
 		</div>
 	);
 }
