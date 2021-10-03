@@ -1,26 +1,30 @@
 {
   "files": {
     "main.css": "/KaunBanegaCrorepati/static/css/main.cbe2774a.chunk.css",
-    "main.js": "/KaunBanegaCrorepati/static/js/main.61bed17f.chunk.js",
-    "main.js.map": "/KaunBanegaCrorepati/static/js/main.61bed17f.chunk.js.map",
+    "main.js": "/KaunBanegaCrorepati/static/js/main.bfee60df.chunk.js",
+    "main.js.map": "/KaunBanegaCrorepati/static/js/main.bfee60df.chunk.js.map",
     "runtime-main.js": "/KaunBanegaCrorepati/static/js/runtime-main.4ee2e507.js",
     "runtime-main.js.map": "/KaunBanegaCrorepati/static/js/runtime-main.4ee2e507.js.map",
     "static/css/2.b8e42a58.chunk.css": "/KaunBanegaCrorepati/static/css/2.b8e42a58.chunk.css",
-    "static/js/2.1296a296.chunk.js": "/KaunBanegaCrorepati/static/js/2.1296a296.chunk.js",
-    "static/js/2.1296a296.chunk.js.map": "/KaunBanegaCrorepati/static/js/2.1296a296.chunk.js.map",
+    "static/js/2.6a375f8f.chunk.js": "/KaunBanegaCrorepati/static/js/2.6a375f8f.chunk.js",
+    "static/js/2.6a375f8f.chunk.js.map": "/KaunBanegaCrorepati/static/js/2.6a375f8f.chunk.js.map",
     "index.html": "/KaunBanegaCrorepati/index.html",
     "static/css/2.b8e42a58.chunk.css.map": "/KaunBanegaCrorepati/static/css/2.b8e42a58.chunk.css.map",
     "static/css/main.cbe2774a.chunk.css.map": "/KaunBanegaCrorepati/static/css/main.cbe2774a.chunk.css.map",
-    "static/js/2.1296a296.chunk.js.LICENSE.txt": "/KaunBanegaCrorepati/static/js/2.1296a296.chunk.js.LICENSE.txt",
-    "static/media/KbcClock.b3d69543.mp3": "/KaunBanegaCrorepati/static/media/KbcClock.b3d69543.mp3",
-    "static/media/Theme.954d31d9.mp3": "/KaunBanegaCrorepati/static/media/Theme.954d31d9.mp3",
-    "static/media/kbcrotate.d0b337b9.png": "/KaunBanegaCrorepati/static/media/kbcrotate.d0b337b9.png"
+    "static/js/2.6a375f8f.chunk.js.LICENSE.txt": "/KaunBanegaCrorepati/static/js/2.6a375f8f.chunk.js.LICENSE.txt",
+    "static/media/clapping.fd315631.mp3": "/KaunBanegaCrorepati/static/media/clapping.fd315631.mp3",
+    "static/media/correct.36200b66.mp3": "/KaunBanegaCrorepati/static/media/correct.36200b66.mp3",
+    "static/media/fifty.6e78f346.png": "/KaunBanegaCrorepati/static/media/fifty.6e78f346.png",
+    "static/media/group.47fb8a14.png": "/KaunBanegaCrorepati/static/media/group.47fb8a14.png",
+    "static/media/kbcrotate.d0b337b9.png": "/KaunBanegaCrorepati/static/media/kbcrotate.d0b337b9.png",
+    "static/media/ticktock.ec4c69b2.mp3": "/KaunBanegaCrorepati/static/media/ticktock.ec4c69b2.mp3",
+    "static/media/wrong answer.8201c8ba.mp3": "/KaunBanegaCrorepati/static/media/wrong answer.8201c8ba.mp3"
   },
   "entrypoints": [
     "static/js/runtime-main.4ee2e507.js",
     "static/css/2.b8e42a58.chunk.css",
-    "static/js/2.1296a296.chunk.js",
+    "static/js/2.6a375f8f.chunk.js",
     "static/css/main.cbe2774a.chunk.css",
-    "static/js/main.61bed17f.chunk.js"
+    "static/js/main.bfee60df.chunk.js"
   ]
 }
